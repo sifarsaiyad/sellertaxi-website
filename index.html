@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Seller Taxi Service – Bhuj, Gujarat</title>
+      <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+      <style>
+         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+         :root {
+         --black: #0d0d0d;
+         --white: #f5f2ec;
+         --yellow: #f5c518;
+         --yellow-dark: #c9a010;
+         --gray: #1a1a1a;
+         --gray2: #2a2a2a;
+         --muted: #888;
+         --font-head: 'Syne', sans-serif;
+         --font-body: 'DM Sans', sans-serif;
+         }
+         html { scroll-behavior: smooth; }
+         body {
+         font-family: var(--font-body);
+         background: var(--black);
+         color: var(--white);
+         overflow-x: hidden;
+         }
+         /* NAV */
+         nav {
+         position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+         display: flex; align-items: center; justify-content: space-between;
+         padding: 1.2rem 5%;
+         background: rgba(13,13,13,0.92);
+         backdrop-filter: blur(10px);
+         border-bottom: 1px solid #222;
+         }
+         .nav-logo {
+         font-family: var(--font-head);
+         font-size: 1.3rem; font-weight: 800;
+         color: var(--yellow);
+         letter-spacing: -0.5px;
+         text-decoration: none;
+         }
+         .nav-logo span { color: var(--white); }
+         .nav-links { display: flex; gap: 2rem; list-style: none; }
+         .nav-links a {
+         font-size: 0.85rem; font-weight: 500; letter-spacing: 0.05em;
+         text-transform: uppercase; color: var(--muted);
+         text-decoration: none; transition: color 0.2s;
+         }
+         .nav-links a:hover { color: var(--yellow); }
+         .nav-cta {
+         background: var(--yellow); color: var(--black);
+         font-family: var(--font-head); font-weight: 700;
+         font-size: 0.85rem; padding: 0.6rem 1.4rem;
+         border-radius: 2px; text-decoration: none;
+         transition: background 0.2s;
+         }
+         .nav-cta:hover { background: var(--yellow-dark); }
+         /* HERO */
+         .hero {
+         min-height: 100vh;
+         padding: 8rem 5% 5rem;
+         display: grid;
+         grid-template-columns: 1fr 1fr;
+         gap: 4rem;
+         align-items: center;
+         position: relative;
+         overflow: hidden;
+         }
+         .hero::before {
+         content: '';
+         position: absolute; top: -20%; right: -10%;
+         width: 600px; height: 600px;
+         background: radial-gradient(circle, rgba(245,197,24,0.12) 0%, transparent 70%);
+         pointer-events: none;
+         }
+         .hero-tag {
+         display: inline-block;
+         background: rgba(245,197,24,0.15);
+         border: 1px solid rgba(245,197,24,0.3);
+         color: var(--yellow);
+         font-size: 0.75rem; font-weight: 500;
+         letter-spacing: 0.12em; text-transform: uppercase;
+         padding: 0.4rem 1rem; border-radius: 2px;
+         margin-bottom: 1.5rem;
+         }
+         .hero h1 {
+         font-family: var(--font-head);
+         font-size: clamp(2.8rem, 5vw, 4.5rem);
+         font-weight: 800; line-height: 1.05;
+         letter-spacing: -1px; margin-bottom: 1.5rem;
+         }
+         .hero h1 em {
+         font-style: normal; color: var(--yellow);
+         display: block;
+         }
+         .hero-sub {
+         font-size: 1.05rem; font-weight: 300; line-height: 1.7;
+         color: #aaa; max-width: 460px; margin-bottom: 2.5rem;
+         }
+         .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+         .btn-primary {
+         background: var(--yellow); color: var(--black);
+         font-family: var(--font-head); font-weight: 700;
+         font-size: 0.95rem; padding: 0.9rem 2rem;
+         border-radius: 2px; text-decoration: none;
+         display: inline-block; transition: background 0.2s;
+         }
+         .btn-primary:hover { background: var(--yellow-dark); }
+         .btn-outline {
+         border: 1px solid #444; color: var(--white);
+         font-family: var(--font-head); font-weight: 500;
+         font-size: 0.95rem; padding: 0.9rem 2rem;
+         border-radius: 2px; text-decoration: none;
+         display: inline-block; transition: border-color 0.2s, color 0.2s;
+         }
+         .btn-outline:hover { border-color: var(--yellow); color: var(--yellow); }
+         .hero-visual {
+         position: relative;
+         display: flex; align-items: center; justify-content: center;
+         }
+         .hero-car-box {
+         background: var(--gray);
+         border: 1px solid #2e2e2e;
+         border-radius: 4px;
+         padding: 3rem 2.5rem;
+         text-align: center;
+         position: relative;
+         width: 100%;
+         }
+         .car-icon { font-size: 5rem; margin-bottom: 1rem; }
+         .hero-badge {
+         position: absolute; top: -1rem; right: -1rem;
+         background: var(--yellow); color: var(--black);
+         font-family: var(--font-head); font-weight: 800;
+         font-size: 0.75rem; padding: 0.5rem 1rem;
+         border-radius: 2px; text-transform: uppercase;
+         letter-spacing: 0.08em;
+         }
+         .stats-row {
+         display: grid; grid-template-columns: repeat(3,1fr);
+         gap: 0; margin-top: 2rem;
+         border-top: 1px solid #333;
+         }
+         .stat { padding: 1.2rem 0; text-align: center; border-right: 1px solid #333; }
+         .stat:last-child { border-right: none; }
+         .stat-num {
+         font-family: var(--font-head); font-size: 1.8rem;
+         font-weight: 800; color: var(--yellow); line-height: 1;
+         margin-bottom: 0.3rem;
+         }
+         .stat-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+         /* MARQUEE */
+         .marquee-wrap {
+         background: var(--yellow); overflow: hidden;
+         padding: 0.8rem 0;
+         }
+         .marquee-inner {
+         display: flex; gap: 3rem;
+         animation: marquee 18s linear infinite;
+         white-space: nowrap;
+         }
+         .marquee-inner span {
+         font-family: var(--font-head); font-weight: 700;
+         font-size: 0.85rem; color: var(--black);
+         text-transform: uppercase; letter-spacing: 0.1em;
+         }
+         .marquee-dot { color: var(--black); opacity: 0.4; }
+         @keyframes marquee { 0%{ transform: translateX(0); } 100%{ transform: translateX(-50%); } }
+         /* SECTION BASE */
+         section { padding: 6rem 5%; }
+         .section-tag {
+         font-size: 0.72rem; font-weight: 500; color: var(--yellow);
+         text-transform: uppercase; letter-spacing: 0.15em;
+         margin-bottom: 0.8rem;
+         }
+         .section-title {
+         font-family: var(--font-head); font-size: clamp(2rem,3.5vw,3rem);
+         font-weight: 800; line-height: 1.1; letter-spacing: -0.5px;
+         margin-bottom: 1rem;
+         }
+         .section-sub { font-size: 1rem; color: #888; line-height: 1.7; max-width: 520px; }
+         /* SERVICES */
+         .services { background: var(--gray); }
+         .services-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1rem; }
+         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5px; background: #2e2e2e; border: 1.5px solid #2e2e2e; }
+         .service-card {
+         background: var(--gray); padding: 2.5rem 2rem;
+         transition: background 0.25s;
+         cursor: default;
+         }
+         .service-card:hover { background: #212121; }
+         .service-icon {
+         font-size: 2rem; margin-bottom: 1.2rem;
+         display: block;
+         }
+         .service-card h3 {
+         font-family: var(--font-head); font-size: 1.1rem;
+         font-weight: 700; margin-bottom: 0.7rem;
+         }
+         .service-card p { font-size: 0.88rem; color: #888; line-height: 1.6; }
+         .service-pill {
+         display: inline-block; margin-top: 1.2rem;
+         font-size: 0.7rem; font-weight: 500; color: var(--yellow);
+         text-transform: uppercase; letter-spacing: 0.1em;
+         border-bottom: 1px solid rgba(245,197,24,0.4);
+         padding-bottom: 1px;
+         }
+         /* HOW IT WORKS */
+         .how { background: var(--black); }
+         .how-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+         .steps { display: flex; flex-direction: column; gap: 0; }
+         .step {
+         display: flex; gap: 1.5rem; align-items: flex-start;
+         padding: 1.8rem 0; border-bottom: 1px solid #222;
+         }
+         .step:last-child { border-bottom: none; }
+         .step-num {
+         font-family: var(--font-head); font-size: 2.5rem;
+         font-weight: 800; color: #2a2a2a; line-height: 1;
+         flex-shrink: 0; min-width: 2.5rem;
+         transition: color 0.2s;
+         }
+         .step:hover .step-num { color: var(--yellow); }
+         .step-content h4 {
+         font-family: var(--font-head); font-size: 1rem;
+         font-weight: 700; margin-bottom: 0.4rem;
+         }
+         .step-content p { font-size: 0.87rem; color: #888; line-height: 1.6; }
+         .how-promo {
+         background: var(--yellow);
+         padding: 3rem; border-radius: 2px;
+         color: var(--black);
+         }
+         .how-promo .promo-tag {
+         font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+         letter-spacing: 0.15em; opacity: 0.6; margin-bottom: 1rem;
+         }
+         .how-promo h3 {
+         font-family: var(--font-head); font-size: 1.9rem;
+         font-weight: 800; line-height: 1.1; margin-bottom: 1rem;
+         }
+         .how-promo p { font-size: 0.9rem; line-height: 1.7; opacity: 0.75; margin-bottom: 2rem; }
+         .promo-feature { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.7rem; }
+         .promo-check { font-size: 1rem; }
+         .promo-feature span { font-size: 0.88rem; font-weight: 500; }
+         /* FLEET */
+         .fleet { background: var(--gray); }
+         .fleet-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1rem; }
+         .cars-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+         .car-card {
+         background: var(--black); border: 1px solid #222;
+         border-radius: 2px; overflow: hidden;
+         transition: border-color 0.2s, transform 0.2s;
+         }
+         .car-card:hover { border-color: var(--yellow); transform: translateY(-3px); }
+         .car-thumb {
+         background: #111; padding: 2.5rem;
+         text-align: center; font-size: 4rem;
+         border-bottom: 1px solid #1a1a1a;
+         }
+         .car-info { padding: 1.5rem; }
+         .car-type { font-size: 0.7rem; font-weight: 500; color: var(--yellow); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.4rem; }
+         .car-info h3 { font-family: var(--font-head); font-size: 1.1rem; font-weight: 700; margin-bottom: 0.6rem; }
+         .car-features { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
+         .car-feat { font-size: 0.75rem; color: #777; }
+         .car-price {
+         display: flex; justify-content: space-between; align-items: center;
+         padding-top: 1rem; border-top: 1px solid #1f1f1f;
+         }
+         .price-from { font-size: 0.7rem; color: #666; }
+         .price-val { font-family: var(--font-head); font-size: 1.3rem; font-weight: 800; color: var(--yellow); }
+         .price-unit { font-size: 0.7rem; color: #666; }
+         /* TESTIMONIALS */
+         .testimonials { background: var(--black); }
+         .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 1.5rem; margin-top: 3.5rem; }
+         .testi-card {
+         background: var(--gray); border: 1px solid #2a2a2a;
+         padding: 2rem; border-radius: 2px;
+         }
+         .stars { color: var(--yellow); font-size: 0.9rem; margin-bottom: 1rem; letter-spacing: 2px; }
+         .testi-card blockquote { font-size: 0.92rem; line-height: 1.7; color: #ccc; margin-bottom: 1.5rem; font-style: italic; }
+         .testi-author { display: flex; align-items: center; gap: 0.8rem; }
+         .author-avatar {
+         width: 36px; height: 36px; border-radius: 50%;
+         background: var(--yellow); color: var(--black);
+         font-family: var(--font-head); font-weight: 800;
+         font-size: 0.75rem; display: flex; align-items: center; justify-content: center;
+         }
+         .author-name { font-weight: 500; font-size: 0.85rem; }
+         .author-loc { font-size: 0.75rem; color: var(--muted); }
+         /* CONTACT */
+         .contact { background: var(--gray); }
+         .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+         .contact-info p { font-size: 0.9rem; color: #888; line-height: 1.7; margin-bottom: 2rem; }
+         .contact-item { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.5rem; }
+         .contact-icon {
+         width: 40px; height: 40px; flex-shrink: 0;
+         background: rgba(245,197,24,0.1); border: 1px solid rgba(245,197,24,0.2);
+         border-radius: 2px; display: flex; align-items: center; justify-content: center;
+         font-size: 1.1rem;
+         }
+         .contact-detail strong { font-size: 0.8rem; color: var(--yellow); text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 0.2rem; }
+         .contact-detail span { font-size: 0.9rem; color: #bbb; }
+         .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+         .contact-form input,
+         .contact-form select,
+         .contact-form textarea {
+         background: #111; border: 1px solid #2e2e2e;
+         color: var(--white); font-family: var(--font-body);
+         font-size: 0.9rem; padding: 0.85rem 1rem;
+         border-radius: 2px; outline: none;
+         transition: border-color 0.2s;
+         }
+         .contact-form input:focus,
+         .contact-form select:focus,
+         .contact-form textarea:focus { border-color: var(--yellow); }
+         .contact-form select option { background: #111; }
+         .contact-form textarea { min-height: 120px; resize: vertical; }
+         .contact-form input::placeholder,
+         .contact-form textarea::placeholder { color: #555; }
+         .form-submit {
+         background: var(--yellow); color: var(--black);
+         font-family: var(--font-head); font-weight: 800;
+         font-size: 0.95rem; padding: 1rem 2rem;
+         border: none; border-radius: 2px; cursor: pointer;
+         transition: background 0.2s; text-align: center;
+         }
+         .form-submit:hover { background: var(--yellow-dark); }
+         /* FOOTER */
+         footer {
+         background: #080808; border-top: 1px solid #1a1a1a;
+         padding: 3rem 5%; display: flex;
+         justify-content: space-between; align-items: center;
+         flex-wrap: wrap; gap: 1.5rem;
+         }
+         .footer-logo {
+         font-family: var(--font-head); font-size: 1.2rem;
+         font-weight: 800; color: var(--yellow);
+         text-decoration: none;
+         }
+         .footer-logo span { color: #555; }
+         footer p { font-size: 0.8rem; color: #555; }
+         .footer-links { display: flex; gap: 1.5rem; }
+         .footer-links a { font-size: 0.8rem; color: #555; text-decoration: none; transition: color 0.2s; }
+         .footer-links a:hover { color: var(--yellow); }
+         /* RESPONSIVE */
+         @media (max-width: 768px) {
+         .hero { grid-template-columns: 1fr; gap: 3rem; padding-top: 7rem; }
+         .hero-visual { display: none; }
+         .how-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+         .nav-links, .nav-cta { display: none; }
+         .form-row { grid-template-columns: 1fr; }
+         .services-header, .fleet-header { flex-direction: column; align-items: flex-start; }
+         }
+      </style>
+   </head>
+   <body>
+      <!-- NAV -->
+      <nav>
+         <a href="#" class="nav-logo">Seller<span>Taxi</span></a>
+         <ul class="nav-links">
+            <li><a href="#services">Services</a></li>
+            <li><a href="#fleet">Fleet</a></li>
+            <li><a href="#how">How It Works</a></li>
+            <li><a href="#contact">Contact</a></li>
+         </ul>
+         <a href="tel:+919909620030" class="nav-cta">Book Now</a>
+      </nav>
+      <!-- HERO -->
+      <section class="hero">
+         <div class="hero-content">
+            <div class="hero-tag">📍 Bhuj, Gujarat · Est. 2010</div>
+            <h1>Reliable Rides <em>Across Gujarat</em></h1>
+            <p class="hero-sub">From airport transfers to outstation trips — Seller Taxi Service offers safe, comfortable, and affordable car leasing across Bhuj and beyond.</p>
+            <div class="hero-btns">
+               <a href="#contact" class="btn-primary">Book a Ride</a>
+               <a href="#fleet" class="btn-outline">View Fleet</a>
+            </div>
+         </div>
+         <div class="hero-visual">
+            <div class="hero-car-box">
+               <div class="hero-badge">Available 24/7</div>
+               <div class="car-icon">🚖</div>
+               <div style="font-family: 'Syne', sans-serif; font-size:1.3rem; font-weight:800; color: #f5c518; margin-bottom:0.3rem;">Seller Taxi Service</div>
+               <div style="font-size:0.8rem; color:#666; margin-bottom:1rem;">Car Leasing · Bhuj, Gujarat</div>
+               <div style="font-size:0.78rem; color:#555; line-height:1.6;">
+                  32/3 Odhav Vandana Society<br>Airport Road, Bhuj 370001
+               </div>
+               <div class="stats-row">
+                  <div class="stat">
+                     <div class="stat-num">500+</div>
+                     <div class="stat-label">Happy clients</div>
+                  </div>
+                  <div class="stat">
+                     <div class="stat-num">15+</div>
+                     <div class="stat-label">Vehicles</div>
+                  </div>
+                  <div class="stat">
+                     <div class="stat-num">24/7</div>
+                     <div class="stat-label">Support</div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- MARQUEE -->
+      <div class="marquee-wrap">
+         <div class="marquee-inner">
+            <span>Airport Transfers</span><span class="marquee-dot">✦</span>
+            <span>Outstation Trips</span><span class="marquee-dot">✦</span>
+            <span>Local City Rides</span><span class="marquee-dot">✦</span>
+            <span>Corporate Leasing</span><span class="marquee-dot">✦</span>
+            <span>Wedding Cars</span><span class="marquee-dot">✦</span>
+            <span>Kutch Tourism</span><span class="marquee-dot">✦</span>
+            <span>Rann of Kutch</span><span class="marquee-dot">✦</span>
+            <span>24/7 Available</span><span class="marquee-dot">✦</span>
+            <!-- duplicate for seamless loop -->
+            <span>Airport Transfers</span><span class="marquee-dot">✦</span>
+            <span>Outstation Trips</span><span class="marquee-dot">✦</span>
+            <span>Local City Rides</span><span class="marquee-dot">✦</span>
+            <span>Corporate Leasing</span><span class="marquee-dot">✦</span>
+            <span>Wedding Cars</span><span class="marquee-dot">✦</span>
+            <span>Kutch Tourism</span><span class="marquee-dot">✦</span>
+            <span>Rann of Kutch</span><span class="marquee-dot">✦</span>
+            <span>24/7 Available</span><span class="marquee-dot">✦</span>
+         </div>
+      </div>
+      <!-- SERVICES -->
+      <section class="services" id="services">
+         <div class="services-header">
+            <div>
+               <div class="section-tag">What We Offer</div>
+               <h2 class="section-title">Our Services</h2>
+            </div>
+            <p class="section-sub" style="text-align:right;">Everything you need for comfortable travel around Bhuj and all of Gujarat.</p>
+         </div>
+         <div class="services-grid">
+            <div class="service-card">
+               <span class="service-icon">✈️</span>
+               <h3>Airport Transfers</h3>
+               <p>Punctual pickups and drop-offs at Bhuj Airport. Flight tracking included so we're always on time.</p>
+               <span class="service-pill">Book Now →</span>
+            </div>
+            <div class="service-card">
+               <span class="service-icon">🛣️</span>
+               <h3>Outstation Trips</h3>
+               <p>Travel to Ahmedabad, Rajkot, Gandhinagar and beyond with experienced drivers and clean vehicles.</p>
+               <span class="service-pill">Get Quote →</span>
+            </div>
+            <div class="service-card">
+               <span class="service-icon">🏙️</span>
+               <h3>Local City Rides</h3>
+               <p>Hourly and daily rentals within Bhuj city for shopping, meetings, hospitals, and more.</p>
+               <span class="service-pill">Call Now →</span>
+            </div>
+            <div class="service-card">
+               <span class="service-icon">🌅</span>
+               <h3>Kutch Tourism</h3>
+               <p>Explore the White Rann, Mandvi Beach, Kalo Dungar, and cultural Kutch with a knowledgeable driver.</p>
+               <span class="service-pill">Explore →</span>
+            </div>
+            <div class="service-card">
+               <span class="service-icon">💼</span>
+               <h3>Corporate Leasing</h3>
+               <p>Monthly and long-term car leasing for businesses and government departments in Bhuj.</p>
+               <span class="service-pill">Enquire →</span>
+            </div>
+            <div class="service-card">
+               <span class="service-icon">💒</span>
+               <h3>Wedding & Events</h3>
+               <p>Decorated cars and luxury vehicles for weddings, receptions, and special occasions across Gujarat.</p>
+               <span class="service-pill">Book Today →</span>
+            </div>
+         </div>
+      </section>
+      <!-- HOW IT WORKS -->
+      <section class="how" id="how">
+         <div class="how-grid">
+            <div>
+               <div class="section-tag">Simple Process</div>
+               <h2 class="section-title">Book in 3 Easy Steps</h2>
+               <div class="steps">
+                  <div class="step">
+                     <span class="step-num">01</span>
+                     <div class="step-content">
+                        <h4>Choose Your Ride</h4>
+                        <p>Select the vehicle type and service you need — hatchback, sedan, SUV, or luxury car.</p>
+                     </div>
+                  </div>
+                  <div class="step">
+                     <span class="step-num">02</span>
+                     <div class="step-content">
+                        <h4>Confirm Your Details</h4>
+                        <p>Share your pickup location, date, time and destination. We'll confirm availability instantly.</p>
+                     </div>
+                  </div>
+                  <div class="step">
+                     <span class="step-num">03</span>
+                     <div class="step-content">
+                        <h4>Ride with Comfort</h4>
+                        <p>Our professional driver arrives on time. Sit back, relax, and reach your destination safely.</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="how-promo">
+               <div class="promo-tag">Why Choose Us</div>
+               <h3>Bhuj's Trusted Taxi Service</h3>
+               <p>Years of experience serving locals and tourists in Kutch district. Your safety and comfort is our first priority.</p>
+               <div class="promo-feature"><span class="promo-check">✓</span><span>Professional, verified drivers</span></div>
+               <div class="promo-feature"><span class="promo-check">✓</span><span>Clean, well-maintained vehicles</span></div>
+               <div class="promo-feature"><span class="promo-check">✓</span><span>Fixed, transparent pricing</span></div>
+               <div class="promo-feature"><span class="promo-check">✓</span><span>24/7 customer support</span></div>
+               <div class="promo-feature"><span class="promo-check">✓</span><span>Kutch & Gujarat tourism experts</span></div>
+               <a href="#contact" class="btn-primary" style="margin-top:1.5rem; display:inline-block;">Book Your Ride</a>
+            </div>
+         </div>
+      </section>
+      <!-- FLEET -->
+      <section class="fleet" id="fleet">
+         <div class="fleet-header">
+            <div>
+               <div class="section-tag">Our Vehicles</div>
+               <h2 class="section-title">Choose Your Ride</h2>
+            </div>
+            <p class="section-sub">Clean, air-conditioned, GPS-enabled vehicles for every budget and occasion.</p>
+         </div>
+         <div class="cars-grid">
+            <div class="car-card">
+               <div class="car-thumb">🚗</div>
+               <div class="car-info">
+                  <div class="car-type">Economy</div>
+                  <h3>Hatchback</h3>
+                  <div class="car-features">
+                     <span class="car-feat">👥 4 Seats</span>
+                     <span class="car-feat">❄️ AC</span>
+                     <span class="car-feat">🧳 Small Luggage</span>
+                  </div>
+                  <div class="car-price">
+                     <div>
+                        <div class="price-from">Starting from</div>
+                        <span class="price-val">₹899</span><span class="price-unit"> /day</span>
+                     </div>
+                     <a href="#contact" style="font-size:0.78rem; color: var(--yellow); text-decoration:none; font-weight:500;">Book →</a>
+                  </div>
+               </div>
+            </div>
+            <div class="car-card">
+               <div class="car-thumb">🚙</div>
+               <div class="car-info">
+                  <div class="car-type">Standard</div>
+                  <h3>Sedan</h3>
+                  <div class="car-features">
+                     <span class="car-feat">👥 5 Seats</span>
+                     <span class="car-feat">❄️ AC</span>
+                     <span class="car-feat">🧳 Medium Luggage</span>
+                  </div>
+                  <div class="car-price">
+                     <div>
+                        <div class="price-from">Starting from</div>
+                        <span class="price-val">₹1,199</span><span class="price-unit"> /day</span>
+                     </div>
+                     <a href="#contact" style="font-size:0.78rem; color: var(--yellow); text-decoration:none; font-weight:500;">Book →</a>
+                  </div>
+               </div>
+            </div>
+            <div class="car-card">
+               <div class="car-thumb">🚐</div>
+               <div class="car-info">
+                  <div class="car-type">Family / Group</div>
+                  <h3>SUV / MUV</h3>
+                  <div class="car-features">
+                     <span class="car-feat">👥 7 Seats</span>
+                     <span class="car-feat">❄️ AC</span>
+                     <span class="car-feat">🧳 Large Luggage</span>
+                  </div>
+                  <div class="car-price">
+                     <div>
+                        <div class="price-from">Starting from</div>
+                        <span class="price-val">₹1,799</span><span class="price-unit"> /day</span>
+                     </div>
+                     <a href="#contact" style="font-size:0.78rem; color: var(--yellow); text-decoration:none; font-weight:500;">Book →</a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- TESTIMONIALS -->
+      <section class="testimonials" id="testimonials">
+         <div class="section-tag">Customer Reviews</div>
+         <h2 class="section-title">What Our Riders Say</h2>
+         <div class="testi-grid">
+            <div class="testi-card">
+               <div class="stars">★★★★★</div>
+               <blockquote>"Best taxi service in Bhuj. The driver was very professional and the car was spotlessly clean. Highly recommend for airport drops!"</blockquote>
+               <div class="testi-author">
+                  <div class="author-avatar">RK</div>
+                  <div>
+                     <div class="author-name">Ravi Kumar</div>
+                     <div class="author-loc">Bhuj, Gujarat</div>
+                  </div>
+               </div>
+            </div>
+            <div class="testi-card">
+               <div class="stars">★★★★★</div>
+               <blockquote>"We booked an SUV for the Rann of Kutch trip. The driver knew all the good spots and was very helpful throughout the journey."</blockquote>
+               <div class="testi-author">
+                  <div class="author-avatar">SP</div>
+                  <div>
+                     <div class="author-name">Sonal Patel</div>
+                     <div class="author-loc">Ahmedabad, Gujarat</div>
+                  </div>
+               </div>
+            </div>
+            <div class="testi-card">
+               <div class="stars">★★★★☆</div>
+               <blockquote>"Reliable and on-time service for our corporate team. We use Seller Taxi for all our office pickups every month. Very trustworthy."</blockquote>
+               <div class="testi-author">
+                  <div class="author-avatar">AM</div>
+                  <div>
+                     <div class="author-name">Arjun Mehta</div>
+                     <div class="author-loc">Corporate Client, Bhuj</div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- CONTACT -->
+      <section class="contact" id="contact">
+         <div class="contact-grid">
+            <div class="contact-info">
+               <div class="section-tag">Get In Touch</div>
+               <h2 class="section-title">Book Your Ride Today</h2>
+               <p>Ready to travel? Call us directly or fill out the form and we'll get back to you within minutes.</p>
+               <div class="contact-item">
+                  <div class="contact-icon">📍</div>
+                  <div class="contact-detail">
+                     <strong>Address</strong>
+                     <span>32/3 Odhav Vandana Society, Airport Road, opp. Muslim Education School, Bhuj, Gujarat 370001</span>
+                  </div>
+               </div>
+               <div class="contact-item">
+                  <div class="contact-icon">📞</div>
+                  <div class="contact-detail">
+                     <strong>Phone</strong>
+                     <span><a href="tel:+919909620030" style="color:#bbb; text-decoration:none;">+91 99096 20030</a></span>
+                  </div>
+               </div>
+               <div class="contact-item">
+                  <div class="contact-icon">🕐</div>
+                  <div class="contact-detail">
+                     <strong>Availability</strong>
+                     <span>24 hours a day, 7 days a week</span>
+                  </div>
+               </div>
+               <div style="margin-top:2rem;">
+                  <a href="https://wa.me/919909620030" style="display:inline-flex; align-items:center; gap:0.6rem; background:#25D366; color:#fff; font-family:'Syne',sans-serif; font-weight:700; font-size:0.9rem; padding:0.85rem 1.8rem; border-radius:2px; text-decoration:none;">
+                  💬 Chat on WhatsApp
+                  </a>
+               </div>
+            </div>
+            <div>
+               <form class="contact-form" onsubmit="handleForm(event)">
+                  <div class="form-row">
+                     <input type="text" placeholder="Your Name" required>
+                     <input type="tel" placeholder="Phone Number" required>
+                  </div>
+                  <select required>
+                     <option value="" disabled selected>Select Service</option>
+                     <option>Airport Transfer</option>
+                     <option>Outstation Trip</option>
+                     <option>Local City Ride</option>
+                     <option>Kutch Tourism</option>
+                     <option>Corporate Leasing</option>
+                     <option>Wedding / Event</option>
+                  </select>
+                  <div class="form-row">
+                     <input type="date" required>
+                     <input type="text" placeholder="Pickup Location">
+                  </div>
+                  <textarea placeholder="Add any details about your trip…"></textarea>
+                  <button type="submit" class="form-submit">Send Booking Request →</button>
+               </form>
+            </div>
+         </div>
+      </section>
+      <!-- FOOTER -->
+      <footer>
+         <a href="#" class="footer-logo">Seller<span>Taxi</span> — Bhuj</a>
+         <p>© 2025 Seller Taxi Service. Bhuj, Gujarat 370001.</p>
+         <div class="footer-links">
+            <a href="#services">Services</a>
+            <a href="#fleet">Fleet</a>
+            <a href="#contact">Contact</a>
+         </div>
+      </footer>
+      <script>
+         function handleForm(e) {
+           e.preventDefault();
+           const btn = e.target.querySelector('.form-submit');
+           btn.textContent = '✓ Request Sent! We'll call you shortly.';
+           btn.style.background = '#2a7a2a';
+           btn.style.color = '#fff';
+           setTimeout(() => {
+             btn.textContent = 'Send Booking Request →';
+             btn.style.background = '';
+             btn.style.color = '';
+             e.target.reset();
+           }, 4000);
+         }
+      </script>
+   </body>
+</html>
